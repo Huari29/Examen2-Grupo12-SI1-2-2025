@@ -4,42 +4,53 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Rol;
 use Illuminate\Support\Facades\Hash;
 
 class UsuarioSeeder extends Seeder
 {
     public function run(): void
     {
+        // Obtener los roles
+        $adminRol = Rol::where('nombre', 'Administrador')->first();
+        $coordinadorRol = Rol::where('nombre', 'Coordinador Académico')->first();
+        $docenteRol = Rol::where('nombre', 'Docente')->first();
+
         $usuarios = [
             [
-                'name' => 'Administrador Principal',
-                'email' => 'admin@ficct.edu.bo',
-                'password' => Hash::make('123456789'),//admin
-                'email_verified_at' => now()
+                'nombre' => 'Administrador Principal',
+                'correo' => 'admin@ficct.edu.bo',
+                'contrasena' => Hash::make('123456789'),
+                'id_rol' => $adminRol?->id,
+                'activo' => true,
             ],
             [
-                'name' => 'Coordinador Académico',
-                'email' => 'coordinador@ficct.edu.bo',
-                'password' => Hash::make('123456789'),//coordinador
-                'email_verified_at' => now()
+                'nombre' => 'Coordinador Académico',
+                'correo' => 'coordinador@ficct.edu.bo',
+                'contrasena' => Hash::make('123456789'),
+                'id_rol' => $coordinadorRol?->id,
+                'activo' => true,
             ],
             [
-                'name' => 'Dr. Juan Pérez',
-                'email' => 'jperez@ficct.edu.bo',
-                'password' => Hash::make('123456789'),//docente
-                'email_verified_at' => now()
+                'nombre' => 'Dr. Juan Pérez',
+                'correo' => 'jperez@ficct.edu.bo',
+                'contrasena' => Hash::make('123456789'),
+                'id_rol' => $docenteRol?->id,
+                'activo' => true,
             ],
             [
-                'name' => 'Dra. María González',
-                'email' => 'mgonzalez@ficct.edu.bo',
-                'password' => Hash::make('123456789'),//docente
-                'email_verified_at' => now()
+                'nombre' => 'Dra. María González',
+                'correo' => 'mgonzalez@ficct.edu.bo',
+                'contrasena' => Hash::make('123456789'),
+                'id_rol' => $docenteRol?->id,
+                'activo' => true,
             ],
             [
-                'name' => 'Ing. Carlos Rodríguez',
-                'email' => 'crodriguez@ficct.edu.bo',
-                'password' => Hash::make('123456789'),//docente
-                'email_verified_at' => now()
+                'nombre' => 'Ing. Carlos Rodríguez',
+                'correo' => 'crodriguez@ficct.edu.bo',
+                'contrasena' => Hash::make('123456789'),
+                'id_rol' => $docenteRol?->id,
+                'activo' => true,
             ]
         ];
 

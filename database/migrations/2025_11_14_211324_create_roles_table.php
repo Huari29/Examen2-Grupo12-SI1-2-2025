@@ -8,16 +8,27 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('rol', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 50);
+            $table->string('nombre', 50)->unique();
             $table->text('descripcion')->nullable();
-            $table->timestamps();
+        });
+
+        // Agregar la foreign key DESPUÉS de crear la tabla rol
+        Schema::table('usuarios', function (Blueprint $table) {
+            $table->foreign('id_rol')
+                ->references('id')
+                ->on('rol')
+                ->onDelete('set null');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::table('usuarios', function (Blueprint $table) {
+            $table->dropForeign(['id_rol']);
+        });
+        
+        Schema::dropIfExists('rol');
     }
 };

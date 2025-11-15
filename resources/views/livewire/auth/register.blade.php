@@ -9,7 +9,7 @@
             @csrf
             <!-- Name -->
             <flux:input
-                name="name"
+                name="nombre"
                 :label="__('Name')"
                 type="text"
                 required
@@ -20,7 +20,7 @@
 
             <!-- Email Address -->
             <flux:input
-                name="email"
+                name="correo"
                 :label="__('Email address')"
                 type="email"
                 required
