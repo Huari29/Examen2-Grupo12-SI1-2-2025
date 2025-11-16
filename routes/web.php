@@ -60,6 +60,17 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/grupos/crear', Grupos\Create::class)->name('grupos.create');
         Route::get('/grupos/{grupo}/editar', Grupos\Edit::class)->name('grupos.edit');
         
+         // Asignar Materias a Grupos (NUEVO)
+        Route::get('/asignar-materias-grupos', \App\Livewire\GestionAcademica\AsignarMateriasGrupos\Index::class)->name('asignar-materias-grupos.index');
+        Route::get('/asignar-materias-grupos/create', \App\Livewire\GestionAcademica\AsignarMateriasGrupos\Create::class)->name('asignar-materias-grupos.create');
+        Route::get('/asignar-materias-grupos/{materiaGrupo}/edit', \App\Livewire\GestionAcademica\AsignarMateriasGrupos\Edit::class)->name('asignar-materias-grupos.edit');
+
+        // Asignar Horarios Evitando Conflictos
+        Route::get('/asignar-horarios', \App\Livewire\GestionAcademica\AsignarHorariosEvitandoConflictos\Index::class)->name('asignar-horarios.index');
+        Route::get('/asignar-horarios/create', \App\Livewire\GestionAcademica\AsignarHorariosEvitandoConflictos\Create::class)->name('asignar-horarios.create');
+        Route::get('/asignar-horarios/{detalleHorario}/edit', \App\Livewire\GestionAcademica\AsignarHorariosEvitandoConflictos\Edit::class)->name('asignar-horarios.edit');
+
+
         // Aulas
         Route::get('/aulas', Aulas\Index::class)->name('aulas.index');
         Route::get('/aulas/crear', Aulas\Create::class)->name('aulas.create');
@@ -68,6 +79,7 @@ Route::middleware(['auth'])->group(function () {
         // Horarios
         Route::get('/horarios', Horarios\Index::class)->name('horarios.index');
         Route::get('/horarios/crear', Horarios\Create::class)->name('horarios.create');
+        Route::get('/horarios/{horario}/editar', Horarios\Edit::class)->name('horarios.edit');
 
         // Asignar Horarios Evitando Conflictos
         Route::get('/asignar-horarios', AsignarHorariosEvitandoConflictos\Index::class)->name('asignar-horarios.index');

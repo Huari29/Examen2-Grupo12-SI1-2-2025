@@ -7,10 +7,19 @@ use App\Models\Horario;
 use Livewire\Attributes\Layout;
 
 #[Layout('components.layouts.app')]
-class Create extends Component
+class Edit extends Component
 {
+    public Horario $horario;
+    
     public $hora_inicio = '';
     public $hora_fin = '';
+
+    public function mount(Horario $horario)
+    {
+        $this->horario = $horario;
+        $this->hora_inicio = \Carbon\Carbon::parse($horario->hora_inicio)->format('H:i');
+        $this->hora_fin = \Carbon\Carbon::parse($horario->hora_fin)->format('H:i');
+    }
 
     protected $rules = [
         'hora_inicio' => 'required|date_format:H:i',
@@ -25,22 +34,22 @@ class Create extends Component
         'hora_fin.after' => 'La hora de fin debe ser posterior a la hora de inicio',
     ];
 
-    public function save()
+    public function update()
     {
         $this->validate();
 
-        Horario::create([
+        $this->horario->update([
             'hora_inicio' => $this->hora_inicio,
             'hora_fin' => $this->hora_fin,
         ]);
 
-        session()->flash('message', 'Horario creado exitosamente.');
+        session()->flash('message', 'Horario actualizado exitosamente.');
 
         return redirect()->route('horarios.index');
     }
 
     public function render()
     {
-        return view('livewire.gestion-academica.horarios.create');
+        return view('livewire.gestion-academica.horarios.edit');
     }
 }

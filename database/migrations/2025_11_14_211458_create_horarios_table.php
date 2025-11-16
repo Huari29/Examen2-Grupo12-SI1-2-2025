@@ -10,10 +10,10 @@ return new class extends Migration
     {
         Schema::create('horarios', function (Blueprint $table) {
             $table->id();
-            $table->string('descripcion', 80)->nullable();
             $table->time('hora_inicio');
             $table->time('hora_fin');
-            $table->timestamps();
+            $table->timestamp('creado_en')->useCurrent();
+            $table->timestamp('actualizado_en')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

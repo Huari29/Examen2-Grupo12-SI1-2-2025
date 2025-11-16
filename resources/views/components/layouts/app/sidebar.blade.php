@@ -37,6 +37,11 @@
                         {{ __('Gestionar Grupos') }}
                     </flux:navlist.item>
 
+                    <flux:navlist.item icon="home" :href="route('asignar-materias-grupos.index')"
+                        :current="request()->routeIs('asignar-materias-grupos.*')" wire:navigate>
+                        {{ __('Asignar Materias a Grupos') }}
+                    </flux:navlist.item>
+
                     <flux:navlist.item icon="home" :href="route('aulas.index')"
                         :current="request()->routeIs('aulas.*')" wire:navigate>
                         {{ __('Gestionar Aulas') }}
