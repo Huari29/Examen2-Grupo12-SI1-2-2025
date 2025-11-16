@@ -36,7 +36,7 @@
                         :current="request()->routeIs('grupos.*')" wire:navigate>
                         {{ __('Gestionar Grupos') }}
                     </flux:navlist.item>
-                    
+
                     <flux:navlist.item icon="home" :href="route('aulas.index')"
                         :current="request()->routeIs('aulas.*')" wire:navigate>
                         {{ __('Gestionar Aulas') }}
@@ -47,11 +47,12 @@
                         {{ __('Gestionar Horarios') }}
                     </flux:navlist.item>
 
-                     {{--@if (auth()->user()->hasRole('Docente'))--}}
-                    <flux:navlist.item icon="home" href="#" wire:navigate>
+                    {{-- @if (auth()->user()->hasRole('Docente')) --}}
+                    <flux:navlist.item icon="home" :href="route('asignar-horarios.index')"
+                        :current="request()->routeIs('asignar-horarios.*')" wire:navigate>
                         {{ __('Asignar Horarios') }}
                     </flux:navlist.item>
-                    {{--@endif--}}
+                    {{-- @endif --}}
                 </flux:navlist.group>
             </flux:navlist>
         @endif

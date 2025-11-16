@@ -10,6 +10,7 @@ use App\Livewire\UsuariosRoles\Usuarios;
 use App\Livewire\Docentes;
 use App\Livewire\GestionAcademica\Horarios;
 use App\Livewire\Asistencia;
+use App\Livewire\GestionAcademica\AsignarHorariosEvitandoConflictos;
 
 Route::get('/', function () {
     return view('welcome');
@@ -67,6 +68,11 @@ Route::middleware(['auth'])->group(function () {
         // Horarios
         Route::get('/horarios', Horarios\Index::class)->name('horarios.index');
         Route::get('/horarios/crear', Horarios\Create::class)->name('horarios.create');
+
+        // Asignar Horarios Evitando Conflictos
+        Route::get('/asignar-horarios', AsignarHorariosEvitandoConflictos\Index::class)->name('asignar-horarios.index');
+        Route::get('/asignar-horarios/create', AsignarHorariosEvitandoConflictos\Create::class)->name('asignar-horarios.create');
+        Route::get('/asignar-horarios/{materiaGrupo}/edit', AsignarHorariosEvitandoConflictos\Edit::class)->name('asignar-horarios.edit');
     });
 
     // ==================== TODOS LOS USUARIOS AUTENTICADOS ====================
