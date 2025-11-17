@@ -92,4 +92,8 @@ Route::middleware(['auth'])->group(function () {
     // Asistencia (accesible para todos)
     Route::get('/asistencia', Asistencia\Index::class)->name('asistencia.index');
     Route::get('/asistencia/registro', Asistencia\Registro::class)->name('asistencia.registro');
+
+    // Reportes
+    Route::get('/reportes', \App\Livewire\GestionAcademica\Reportes\Index::class)->name('reportes.index');
+
 });

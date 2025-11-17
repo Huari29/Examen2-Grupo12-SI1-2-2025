@@ -50,7 +50,7 @@ class Index extends Component
         $grupos = Grupo::with('materias')
             ->where('nombre', 'like', '%' . $this->search . '%')
             ->orWhere('codigo', 'like', '%' . $this->search . '%')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('id_grupo', 'desc')
             ->paginate(10);
 
         return view('livewire.gestion-academica.grupos.index', [

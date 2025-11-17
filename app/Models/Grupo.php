@@ -27,8 +27,8 @@ class Grupo extends Model
     public function materias(): BelongsToMany
     {
         return $this->belongsToMany(Materia::class, 'materia_grupo', 'id_grupo', 'id_materia')
-            ->withPivot('id_docente', 'gestion', 'activo')
-            ->withTimestamps();
+            ->withPivot('id_docente', 'gestion', 'activo');
+            //->withTimestamps();
     }
 
     public function materiaGrupos(): HasMany
