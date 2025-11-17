@@ -59,7 +59,31 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/grupos', Grupos\Index::class)->name('grupos.index');
         Route::get('/grupos/crear', Grupos\Create::class)->name('grupos.create');
         Route::get('/grupos/{grupo}/editar', Grupos\Edit::class)->name('grupos.edit');
-        
+        // Grupos
+Route::get('/grupos', Grupos\Index::class)->name('grupos.index');
+Route::get('/grupos/crear', Grupos\Create::class)->name('grupos.create');
+Route::get('/grupos/{grupo}/editar', Grupos\Edit::class)->name('grupos.edit');
+
+// ⬇️ AGREGAR ESTAS RUTAS AQUÍ ⬇️
+// Exportaciones de Grupos
+Route::get('/grupos/export/pdf', function() {
+    $search = request()->get('search', '');
+    $exporter = new \App\Exports\GruposPDF(['search' => $search]);
+    return $exporter->descargar();
+})->name('grupos.export.pdf');
+
+Route::get('/grupos/export/excel', function() {
+    $search = request()->get('search', '');
+    $exporter = new \App\Exports\GruposExcel(['search' => $search]);
+    return $exporter->descargar();
+})->name('grupos.export.excel');
+
+Route::get('/grupos/export/word', function() {
+    $search = request()->get('search', '');
+    $exporter = new \App\Exports\GruposWord(['search' => $search]);
+    return $exporter->descargar();
+})->name('grupos.export.word');
+// ⬆️ FIN DE LAS RUTAS DE EXPORTACIÓN ⬆️
          // Asignar Materias a Grupos (NUEVO)
         Route::get('/asignar-materias-grupos', \App\Livewire\GestionAcademica\AsignarMateriasGrupos\Index::class)->name('asignar-materias-grupos.index');
         Route::get('/asignar-materias-grupos/create', \App\Livewire\GestionAcademica\AsignarMateriasGrupos\Create::class)->name('asignar-materias-grupos.create');

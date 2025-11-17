@@ -24,11 +24,12 @@ class Materia extends Model
     ];
 
     // Relaciones
-    public function grupos(): BelongsToMany
+    public function grupos()
     {
         return $this->belongsToMany(Grupo::class, 'materia_grupo', 'id_materia', 'id_grupo')
-            ->withPivot('id_docente', 'gestion', 'activo');
-            //->withTimestamps();
+            ->using(MateriaGrupo::class)
+            ->withPivot('id_docente', 'gestion', 'activo', 'creado_en', 'actualizado_en')
+            ->withoutTimestamps(); // ✅ Cambiado aquí
     }
 
     public function materiaGrupos(): HasMany

@@ -179,7 +179,7 @@ return [
          *
          * @var string
          */
-        'default_font' => 'serif',
+        'default_font' => 'DejaVu Sans', // ⬅️ Cambiar de 'serif' a 'DejaVu Sans'
 
         /**
          * Image DPI setting
@@ -267,7 +267,7 @@ return [
          *
          * @var bool
          */
-        'enable_remote' => false,
+        'enable_remote' => true, // ⬅️ Cambiar de false a true (para cargar fuentes)
 
         /**
          * List of allowed remote hosts

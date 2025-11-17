@@ -1,28 +1,67 @@
 <div class="space-y-6">
     <!-- Header -->
-    <div class="flex items-center justify-between">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
             <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Gestión de Grupos</h1>
             <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">Administra los grupos de la facultad</p>
         </div>
-        <a href="{{ route('grupos.create') }}" 
-           class="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition">
-            + Nuevo Grupo
-        </a>
+        <div class="flex flex-wrap items-center gap-3">
+            <!-- Botones de Exportación -->
+            <div class="flex items-center gap-2">
+                {{-- Botón PDF --}}
+                <a href="{{ route('grupos.export.pdf', ['search' => $search]) }}" target="_blank"
+                    class="inline-flex items-center gap-2 rounded-lg border border-red-300 dark:border-red-700 bg-red-50 dark:bg-red-900/20 px-3 py-2 text-sm font-semibold text-red-700 dark:text-red-300 hover:bg-red-100 dark:hover:bg-red-900/40 transition">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                    </svg>
+                    PDF
+                </a>
+
+                {{-- Botón Excel --}}
+                <a href="{{ route('grupos.export.excel', ['search' => $search]) }}" target="_blank"
+                    class="inline-flex items-center gap-2 rounded-lg border border-green-300 dark:border-green-700 bg-green-50 dark:bg-green-900/20 px-3 py-2 text-sm font-semibold text-green-700 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900/40 transition">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0112 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5" />
+                    </svg>
+                    Excel
+                </a>
+
+                {{-- Botón Word --}}
+                <a href="{{ route('grupos.export.word', ['search' => $search]) }}" target="_blank"
+                    class="inline-flex items-center gap-2 rounded-lg border border-blue-300 dark:border-blue-700 bg-blue-50 dark:bg-blue-900/20 px-3 py-2 text-sm font-semibold text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                    </svg>
+                    Word
+                </a>
+            </div>
+            {{-- Separador vertical --}}
+            <div class="hidden sm:block w-px h-8 bg-gray-300 dark:bg-gray-600"></div>
+
+            {{-- Botón Nuevo Grupo --}}
+            <a href="{{ route('grupos.create') }}"
+                class="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+                Nuevo Grupo
+            </a>
+        </div>
     </div>
 
     <!-- Search -->
     <div class="max-w-md">
-        <input 
-            type="text" 
-            wire:model.live="search" 
-            placeholder="Buscar..."
+        <input type="text" wire:model.live="search" placeholder="Buscar..."
             class="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
     </div>
 
     <!-- Messages -->
     @if (session()->has('message'))
-        <div class="rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 px-4 py-3 text-sm text-green-800 dark:text-green-300">
+        <div
+            class="rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 px-4 py-3 text-sm text-green-800 dark:text-green-300">
             {{ session('message') }}
         </div>
     @endif
@@ -33,25 +72,39 @@
             <table class="w-full bg-white dark:bg-gray-900">
                 <thead class="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                     <tr>
-                        <th class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200">Código</th>
-                        <th class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200">Nombre</th>
-                        <th class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200">Materia</th>
-                        <th class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200">Gestión</th>
-                        <th class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200">Estado</th>
-                        <th class="px-6 py-3.5 text-right text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200">Acciones</th>
+                        <th
+                            class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200">
+                            Código</th>
+                        <th
+                            class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200">
+                            Nombre</th>
+                        <th
+                            class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200">
+                            Materia</th>
+                        <th
+                            class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200">
+                            Gestión</th>
+                        <th
+                            class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200">
+                            Estado</th>
+                        <th
+                            class="px-6 py-3.5 text-right text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200">
+                            Acciones</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                     @forelse ($grupos as $grupo)
                         <tr class="bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition">
                             <td class="whitespace-nowrap px-6 py-4">
-                                <span class="text-sm font-semibold text-gray-900 dark:text-gray-100">{{ $grupo->codigo }}</span>
+                                <span
+                                    class="text-sm font-semibold text-gray-900 dark:text-gray-100">{{ $grupo->codigo }}</span>
                             </td>
                             <td class="px-6 py-4">
                                 <span class="text-sm text-gray-900 dark:text-gray-100">{{ $grupo->nombre }}</span>
                             </td>
                             <td class="px-6 py-4">
-                                <span class="text-sm text-gray-700 dark:text-gray-300">{{ $grupo->materia->nombre ?? 'N/A' }}</span>
+                                <span
+                                    class="text-sm text-gray-700 dark:text-gray-300">{{ $grupo->materia->nombre ?? 'N/A' }}</span>
                             </td>
                             <td class="whitespace-nowrap px-6 py-4">
                                 <span class="text-sm text-gray-700 dark:text-gray-300">{{ $grupo->gestion }}</span>
@@ -65,8 +118,8 @@
                             </td>
                             <td class="whitespace-nowrap px-6 py-4 text-right">
                                 <div class="flex items-center justify-end gap-3">
-                                    <a href="{{ route('grupos.edit', $grupo->id_grupo) }}" 
-                                       class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition">Editar</a>
+                                    <a href="{{ route('grupos.edit', $grupo->id_grupo) }}"
+                                        class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition">Editar</a>
                                     <button wire:click="confirmDelete({{ $grupo->id_grupo }})"
                                         class="text-sm font-medium text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 transition">Eliminar</button>
                                 </div>
@@ -74,14 +127,15 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-6 py-12 text-center text-gray-500 dark:text-gray-400">No se encontraron grupos</td>
+                            <td colspan="6" class="px-6 py-12 text-center text-gray-500 dark:text-gray-400">No se
+                                encontraron grupos</td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
 
-        @if($grupos->hasPages())
+        @if ($grupos->hasPages())
             <div class="border-t border-gray-200 dark:border-gray-700 px-4 py-3 bg-gray-50 dark:bg-gray-800">
                 {{ $grupos->links() }}
             </div>
@@ -89,25 +143,31 @@
     </div>
 
     <!-- Delete Modal -->
-    @if($confirmingDeletion)
+    @if ($confirmingDeletion)
         <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full border border-gray-200 dark:border-gray-700">
+            <div
+                class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full border border-gray-200 dark:border-gray-700">
                 <div class="p-6">
                     <div class="flex items-start gap-4">
                         <div class="flex-shrink-0">
-                            <div class="flex size-12 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30">
-                                <svg class="size-6 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                            <div
+                                class="flex size-12 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30">
+                                <svg class="size-6 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
                                 </svg>
                             </div>
                         </div>
                         <div class="flex-1">
                             <h3 class="text-lg font-semibold text-gray-900 dark:text-white">¿Eliminar Grupo?</h3>
-                            <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Esta acción no se puede deshacer.</p>
+                            <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Esta acción no se puede deshacer.
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 dark:bg-gray-900/50 px-6 py-4 flex items-center justify-end gap-3 border-t border-gray-200 dark:border-gray-700">
+                <div
+                    class="bg-gray-50 dark:bg-gray-900/50 px-6 py-4 flex items-center justify-end gap-3 border-t border-gray-200 dark:border-gray-700">
                     <button wire:click="$set('confirmingDeletion', false)"
                         class="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition">Cancelar</button>
                     <button wire:click="delete"

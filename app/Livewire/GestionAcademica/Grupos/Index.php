@@ -5,6 +5,7 @@ namespace App\Livewire\GestionAcademica\Grupos;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Grupo;
+use App\Models\Materia;
 use Livewire\Attributes\Layout;
 
 #[Layout('components.layouts.app')]
@@ -57,4 +58,31 @@ class Index extends Component
             'grupos' => $grupos
         ]);
     }
+
+    /**
+ * Exportar a PDF
+ */
+public function exportarPDF()
+{
+    $exporter = new \App\Exports\GruposPDF(['search' => $this->search]);
+    return $exporter->descargar();
+}
+
+/**
+ * Exportar a Excel
+ */
+public function exportarExcel()
+{
+    $exporter = new \App\Exports\GruposExcel(['search' => $this->search]);
+    return $exporter->descargar();
+}
+
+/**
+ * Exportar a Word
+ */
+public function exportarWord()
+{
+    $exporter = new \App\Exports\GruposWord(['search' => $this->search]);
+    return $exporter->descargar();
+}
 }
